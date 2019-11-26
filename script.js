@@ -1,5 +1,5 @@
 var number = 0; // Порядковый номер инцидента
-var arr_table = []; // Массив строк
+var arr_table = []; // Массив строчек таблицы
 var sum_row = 0; // Порядковый номер строки
 
 // Поиск элемента по id
@@ -23,8 +23,8 @@ Array.prototype.filter.call(forms, function(form) {
         event.preventDefault();
         event.stopPropagation();
         if (form.checkValidity() === true) {
-            var date = find("date").value;
-            var description = find("description").value;
+            var date = find("date").value; // Взятие данных даты
+            var description = find("description").value; // Взятие данных описания
             add_to_table_array(date, description); // Вызов функции для добавления данных в массив таблицы
         }
         form.classList.add('was-validated');
@@ -65,8 +65,8 @@ function update_sum_row() {
 
 function remove_from_table(row) {
     let index = row.rowIndex - 1; // Нахождение индекса строки
-    arr_table.splice(index, 1); 
-    table.deleteRow(index);
+    arr_table.splice(index, 1); // Удалить данные с индекса (количество 1)
+    table.deleteRow(index); // Удаление строки по индексу
     update_sum_row();
 }
 
