@@ -8,8 +8,6 @@ function find(id) {
     return document.getElementById(id);
 }
 
-// Тело таблицы
-var table = find("main-table").getElementsByTagName("tbody");
 
 
 
@@ -31,20 +29,19 @@ function add_to_table_array(date, description) {
 }
 
 
-var createTr = document.createElement("tr");
-var createTh = document.createElement("th");
-var createTd = document.createElement("td");
 
 
+function add_to_table(arr) {
 
-function add_to_table(array) {
+// Тело таблицы
+    var table = find("table-body");
+    var text_html = "<td>" + arr[0] + "</td><td>" + arr[1] + "</td><td>" + arr[2] + "</td></tr>";
     var new_row = document.createElement('tr');
-    var new_col = new_row.createElement('td');
-    new_col.innerText = array[0];
-    new_col.innerText = array[1];
-    new_col.innerText = array[2];
+    new_row.innerHTML = text_html;
     table.appendChild(new_row);
+
 }
+
 
 
 
