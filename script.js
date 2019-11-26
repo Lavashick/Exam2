@@ -45,7 +45,7 @@ var table = find("table-body");
 
 // Добавление данных из массива В ТАБЛИЦУ и создание строчек
 function add_to_table(arr) {
-    var text_html = "<td>" + arr[0] + "</td><td>" + arr[1] + "</td><td>" + arr[2] + "</td></tr>";
+    var text_html = "<td>" + arr[0] + "</td><td>" + arr[1] + "</td><td>" + arr[2] + "</td>" + "<td>&#10008</td>";
     var new_row = document.createElement('tr');
     new_row.innerHTML = text_html;
     table.appendChild(new_row);
