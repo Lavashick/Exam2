@@ -20,7 +20,7 @@ function update_sum_row() {
 find("clear").addEventListener("click", function(){
     find("date").value = "";
     find("description").value = "";
-})
+});
 
 
 // Валидация ввода и взятие данных из формы
@@ -45,14 +45,16 @@ var table = find("table-body");
 
 // Добавление данных из массива В ТАБЛИЦУ и создание строчек
 function add_to_table(arr) {
-    var text_html = "<td>" + arr[0] + "</td><td>" + arr[1] + "</td><td>" + arr[2] + "</td>" + "<td>&#10008</td>";
+    var text_html = "<td>" + arr[0] + "</td><td>" + arr[1] + "</td><td>" + arr[2] + "</td>" + "<td style='cursor: pointer; color: red;' onclick='delete_row()'>&#10008</td>";
     var new_row = document.createElement('tr');
     new_row.innerHTML = text_html;
     table.appendChild(new_row);
     update_sum_row();
 }
 
-
+function delete_row() {
+    
+}
 
 
 
