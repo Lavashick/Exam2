@@ -16,16 +16,24 @@
     <div class="col-4">
 
         <!-- Начало формы -->
-        <form>
+        <form method="get" class="needs-validation" novalidate>
             <div class="form-group">
                 <label for="date">Введите дату:</label>
-                <input type="date" class="form-control" id="date">
+                <input type="date" class="form-control" id="date" required>
+                <div class="invalid-feedback">
+                    Введите дату
+                </div>
             </div>
+
             <div class="form-group">
                 <label for="description">Описание:</label>
-                <textarea class="form-control" id="description" rows="3"></textarea>
+                <textarea class="form-control" id="description" rows="3" required></textarea>
+                <div class="invalid-feedback">
+                    Введите описание
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Добавить</button>
+            <button type="submit" class="btn btn-primary" id="show-table-btn">Добавить</button>
+
         </form>
         <!-- Конец формы -->
 
