@@ -1,3 +1,4 @@
+/*
 var number = 0; // Порядковый номер инцидента
 var date; // Дата инцидента
 var description; // Описание инцидента
@@ -52,7 +53,7 @@ function add_to_table(arr) {
     var new_row = document.createElement('tr');
     new_row.innerHTML = text_html;
     new_row.id = "number" + arr[0];
-    new_row.
+
     table.appendChild(new_row);
     update_sum_row();
 }
@@ -79,20 +80,43 @@ function delete_row() {
     }, false);
 })();
 
-/*
-
-// Запись данных в массив для таблицы
-function add_to_table_array(date, description) {
-    number += 1;
-    arr_table.push([number, date, description]);
-    add_to_table(arr_table[number - 1]);
-}
 */
-/*
+var number = 0; // Порядковый номер инцидента
+var arr_table = []; // Массив строк
+var sum_row = 0; // Порядковый номер строки
+
+// Поиск элемента по id
+function find(id) {
+    return document.getElementById(id);
+}
 // Тело таблицы
 var table = find("table-body");
 
-function add_to_table(data) { // Просто добавление новых данных
+// Валидация по нажатию на кнопку
+var forms = document.getElementsByClassName('needs-validation');
+Array.prototype.filter.call(forms, function(form) {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (form.checkValidity() === true) {
+            var date = find("date").value;
+            var description = find("description").value;
+            add_to_table_array(date, description); // Вызов функции для добавления данных в массив таблицы
+        }
+        form.classList.add('was-validated');
+    }, false);
+});
+
+// Запись данных В МАССИВ для таблицы
+function add_to_table_array(date, description) {
+    number += 1;
+    arr_table.push([number, date, description]); //
+    add_to_table(arr_table[arr_table.length - 1]);
+}
+
+
+// Добавление новых данных В САМУ ТАБЛИЦУ
+function add_to_table(data) {
     let row_index = table.rows.length;
     let row = table.insertRow(row_index); // Создание новой строчки
     for (let i = 0; i < data.length; i++) {
@@ -102,11 +126,28 @@ function add_to_table(data) { // Просто добавление новых д
     let cell = row.insertCell(data.length);
     cell.innerHTML = "&#10008;";
     cell.style.color = "red";
+    cell.style.cursor = "pointer";
     cell.addEventListener("click", function () { remove_from_table(row); });
-    // Данные генерируются в таблице в реальном времени, так как все работает через ссылки (getElementById возвращает ссылку,
-    // insertCell возвращает ссылку на объект и тд
     update_sum_row();
 }
+
+
+// Обновление данных о количестве строк в таблице
+function update_sum_row() {
+    sum_row = find("main-table").rows.length - 1;
+    if (sum_row === -1)
+        sum_row = 0;
+    find("sum-row").innerText = sum_row.toString();
+}
+
+// Очистка поля данных
+find("clear").addEventListener("click", function(){
+    find("date").value = "";
+    find("description").value = "";
+});
+
+
+
 
 function remove_from_table(row) {
     let index = row.rowIndex - 1;
@@ -117,22 +158,3 @@ function remove_from_table(row) {
 
 
 
-(function() {
-    'use strict';
-    window.addEventListener('load', function() {
-        var forms = document.getElementsByClassName('needs-validation');
-        var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                if (form.checkValidity() === true) {
-                    var date = find("date").value;
-                    var description = find("description").value;
-                    add_to_table_array(date, description);
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    }, false);
-})();
- */
