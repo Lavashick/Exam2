@@ -2,7 +2,7 @@ var number = 0; // Порядковый номер инцидента
 var date; // Дата инцидента
 var description; // Описание инцидента
 var arr_table = [];
-var sum_row;
+var sum_row = 0;
 
 // Поиск элемента по id
 function find(id) {
@@ -10,9 +10,10 @@ function find(id) {
 }
 
 function update_sum_row() {
-    document.querySelectorAll("tr").forEach(function() {
-
-    })
+     sum_row = find("main-table").rows.length - 1;
+     if (sum_row === -1)
+         sum_row = 0;
+     find("sum-row").innerText = sum_row.toString();
 }
 
 // Очистка поля данных
@@ -42,12 +43,13 @@ function add_to_table_array(date, description) {
 // Тело таблицы
 var table = find("table-body");
 
-// Добавление данных из массива в создание строчек
+// Добавление данных из массива В ТАБЛИЦУ и создание строчек
 function add_to_table(arr) {
     var text_html = "<td>" + arr[0] + "</td><td>" + arr[1] + "</td><td>" + arr[2] + "</td></tr>";
     var new_row = document.createElement('tr');
     new_row.innerHTML = text_html;
     table.appendChild(new_row);
+    update_sum_row();
 }
 
 
@@ -69,23 +71,3 @@ function add_to_table(arr) {
         });
     }, false);
 })();
-
-/*
-(function() {
-    'use strict';
-    window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-    }, false);
-})();
-*/
