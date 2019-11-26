@@ -2,20 +2,31 @@ var number = 0; // Порядковый номер инцидента
 var date; // Дата инцидента
 var description; // Описание инцидента
 var arr_table = [];
+var sum_row;
 
 // Поиск элемента по id
 function find(id) {
     return document.getElementById(id);
 }
 
+function update_sum_row() {
+    document.querySelectorAll("tr").forEach(function() {
 
+    })
+}
+
+// Очистка поля данных
+find("clear").addEventListener("click", function(){
+    find("date").value = "";
+    find("description").value = "";
+})
 
 
 // Валидация ввода и взятие данных из формы
 find("show-table-btn").addEventListener("click", function () {
     date = find("date").value;
     description = find("description").value;
-    if (!(date === "" & description === ""))
+    if (!(date === "" || description === ""))
         add_to_table_array(date, description);
 });
 
@@ -28,18 +39,15 @@ function add_to_table_array(date, description) {
     add_to_table(arr_table);
 }
 
-
-
-
-function add_to_table(arr) {
-
 // Тело таблицы
-    var table = find("table-body");
+var table = find("table-body");
+
+// Добавление данных из массива в создание строчек
+function add_to_table(arr) {
     var text_html = "<td>" + arr[0] + "</td><td>" + arr[1] + "</td><td>" + arr[2] + "</td></tr>";
     var new_row = document.createElement('tr');
     new_row.innerHTML = text_html;
     table.appendChild(new_row);
-
 }
 
 
@@ -55,7 +63,6 @@ function add_to_table(arr) {
                 event.preventDefault();
                 event.stopPropagation();
                 if (form.checkValidity() === true) {
-                    show_info()
                 }
                 form.classList.add('was-validated');
             }, false);
@@ -63,4 +70,22 @@ function add_to_table(arr) {
     }, false);
 })();
 
-
+/*
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+*/
